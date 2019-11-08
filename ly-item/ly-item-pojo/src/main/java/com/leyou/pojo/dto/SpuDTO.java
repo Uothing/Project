@@ -25,6 +25,15 @@ public class SpuDTO {
     private String brandName;// 品牌名称
 
     /**
+     * 商品详情
+     */
+    private SpuDetailDTO spuDetail;
+    /**
+     * spu下的sku的集合
+     */
+    private List<SkuDTO> skus;
+
+    /**
      * 方便同时获取3级分类
      * @return
      */

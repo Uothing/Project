@@ -44,9 +44,13 @@ public class ItemController {
 
     //根据id查询手机的  属性组里的详细属性
     @GetMapping("/params")
-    public ResponseEntity<List<SpecParamDTO>> queryGroupItemById(@RequestParam("gid") Long gid) {
+    public ResponseEntity<List<SpecParamDTO>> queryGroupItemById(
+            @RequestParam(value = "gid", required = false) Long gid,
+            @RequestParam(value = "cid", required = false) Long cid,
+            @RequestParam(value = "searching", required = false) Boolean searching
+    ) {
 
         return ResponseEntity
-                .ok(itemService.queryGroupItemById(gid));
+                .ok(itemService.queryGroupItemById(gid, cid, searching));
     }
 }

@@ -7,6 +7,7 @@ import com.leyou.common.exception.LyException;
 import com.leyou.common.utils.BeanHelper;
 import com.leyou.common.vo.PageResult;
 import com.leyou.item.entity.Brand;
+import com.leyou.item.entity.Category;
 import com.leyou.mapper.BrandMapper;
 import com.leyou.pojo.dto.BrandDTO;
 import org.apache.commons.lang3.StringUtils;
@@ -113,5 +114,21 @@ public class BrandService {
             throw new LyException(ExceptionEnum.BRAND_NOT_FOUND);
         }
         return BeanHelper.copyProperties(brand, BrandDTO.class);
+    }
+
+    //新增商品，根据所选商品分类 自动回显所属品牌信息
+    public List<BrandDTO> queryBrandById(Long id) {
+
+//        Category category = new Category();
+//        category.setId(id);
+
+        //查询
+        List<Brand> brandList = brandMapper.queryBrandById(id);
+
+        if (CollectionUtils.isEmpty(brandList)) {
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOUND);
+        }
+
+        return BeanHelper.copyWithCollection(brandList, BrandDTO.class);
     }
 }

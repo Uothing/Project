@@ -14,6 +14,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Random;
@@ -84,11 +85,13 @@ public class ItemService {
 
 
     //根据id查询手机的  属性组信息
-    public List<SpecParamDTO> queryGroupItemById(Long gid) {
+    public List<SpecParamDTO> queryGroupItemById(Long gid, Long cid, Boolean searching) {
 
         //赋值id
         SpecParam specParam = new SpecParam();
         specParam.setGroupId(gid);
+        specParam.setCid(cid);
+        specParam.setSearching(searching);
         //查询
         List<SpecParam> specParamList = specParamMapper.select(specParam);
 

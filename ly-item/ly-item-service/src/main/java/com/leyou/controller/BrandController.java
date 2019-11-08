@@ -3,6 +3,7 @@ package com.leyou.controller;
 import com.leyou.common.vo.PageResult;
 import com.leyou.item.entity.Brand;
 import com.leyou.pojo.dto.BrandDTO;
+import com.leyou.pojo.dto.CategoryDTO;
 import com.leyou.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,5 +48,13 @@ public class BrandController {
     public ResponseEntity<Void> updateBrand(BrandDTO brand, @RequestParam("cids")List<Long> ids) {
         brandService.updateBrand(brand, ids);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+
+    //新增商品，根据所选商品分类 自动回显所属品牌信息
+    @GetMapping("/of/category")
+    public ResponseEntity<List<BrandDTO>> queryBrandById(@RequestParam("id")Long id) {
+
+        return ResponseEntity.ok(brandService.queryBrandById(id));
     }
 }
